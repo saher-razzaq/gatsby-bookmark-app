@@ -55,20 +55,20 @@ const IndexPage = () => {
   const classes = useStyles();
 
   const { loading, error, data} = useQuery(APOLLO_QUERY);
-  const [addBookmark] = useMutation(AddBookMarkMutation)
-  const urlRef = useRef();
-  const titleRef = useRef();
-  const descRef = useRef();
+  const [addBookmark] = useMutation(AddBookMarkMutation);
+  const urlRef = useRef("");
+  const titleRef = useRef("");
+  const descRef = useRef("");
 
   const handleBookmark = async (e) => {
     e.preventDefault();
-
+    console.log(urlRef.current.value);
     await addBookmark({
       variables: {
         url: urlRef.current.value,
         title: titleRef.current.value,
         desc: descRef.current.value
-      }, refetchQueries: [{ query: APOLLO_QUERY }]
+      },refetchQueries:[{query:APOLLO_QUERY}]
     });
 
     urlRef.current.value = '';
@@ -90,14 +90,15 @@ const IndexPage = () => {
       <Container maxWidth="sm" width='100%'>
         <Box my={3}>
           <Box boxShadow={3} textAlign='center' my={3}>
-          
-            <form onSubmit={handleBookmark}>
-                                     
+           <div>
+           <form >
               <input type='text'  name='url' placeholder='URL' ref={urlRef} /><br />
               <input type='text' name='title' placeholder='Title' ref={titleRef} /><br />
               <input type='text' name='Description' placeholder='Description' ref={descRef} /><br />
-              <Button variant="contained" color="primary">Add Bookmark</Button>
+              <Button onClick={handleBookmark} variant="contained" color="primary">Add Bookmark</Button>
             </form>
+           </div>
+            
           </Box>
 
           <div>
