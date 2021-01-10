@@ -1,4 +1,5 @@
 [build]
-  command = "yarn build"
+  CI=''
+  command = "CI= npm run build"
   publish = "public/"
   functions = "functions/"
