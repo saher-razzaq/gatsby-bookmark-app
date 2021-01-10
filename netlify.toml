@@ -1,9 +1,6 @@
 [build]
   CI=''
-  command = "CI= npm run build"
+  command = "CI= npm run build  && cd functions && npm install"
   publish = "public/"
   functions = "functions/"
 
-
-  [[plugins]]
-  package = "@netlify/plugin-functions-install-core"
